@@ -1,11 +1,13 @@
 <template>
-  <RouterLink to="/">Notes</RouterLink>
-  |
-  <RouterLink to="/stats">Stats</RouterLink>
+	<NavBar />
 
 	<RouterView />
 </template>
 
-<script setup></script>
+<script setup>
+import NavBar from '@/components/layout/NavBar.vue';
+</script>
 
-<style lang="scss" scoped></style>
+<style lang="scss">
+@import 'bulma/css/bulma.min.css';
+</style>
