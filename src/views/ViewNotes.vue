@@ -28,44 +28,24 @@
 			</div>
 		</form>
 
-		<Note
-			v-for="note in notes"
-			:key="note.id"
-			:note="note"
-			@deleteClicked="deleteNote"
-		/>
+		<Note v-for="note in storeNotes.notes" :key="note.id" :note="note" />
 	</div>
 </template>
 
 <script setup>
 import Note from '@/components/notes/Note.vue';
+import { useStoreNotes } from '@/stores/storeNotes';
 import { ref } from 'vue';
+
+const storeNotes = useStoreNotes();
 
 const newNote = ref('');
 const newNoteRef = ref(null);
 
-const notes = ref([
-	{
-		id: 'id1',
-		content: 'This is a long content of note 1'
-	},
-	{
-		id: 'id2',
-		content: 'Content of note 2'
-	}
-]);
-
 const addNote = () => {
-	notes.value.unshift({
-		id: Math.random().toString(),
-		content: newNote.value
-	});
+	storeNotes.addNote(newNote.value);
 	newNote.value = '';
 	newNoteRef.value.focus();
-};
-
-const deleteNote = (noteId) => {
-	notes.value = notes.value.filter((note) => note.id !== noteId);
 };
 </script>
 
