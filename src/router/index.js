@@ -1,3 +1,4 @@
+import ViewEditNote from '@/views/ViewEditNote.vue';
 import ViewNotes from '@/views/ViewNotes.vue';
 import ViewStats from '@/views/ViewStats.vue';
 import { createRouter, createWebHistory } from 'vue-router';
@@ -9,6 +10,11 @@ const router = createRouter({
 			path: '/',
 			name: 'Notes',
 			component: ViewNotes
+		},
+		{
+			path: '/edit-note/:id',
+			name: 'EditNote',
+			component: ViewEditNote
 		},
 		{
 			path: '/stats',
