@@ -8,7 +8,7 @@
 			v-model="noteContent"
 		>
 			<template #buttons>
-        <button class="button is-link is-light" @click="$router.push('/')">
+        <button class="button is-link is-light mr-2" @click="$router.push('/')">
           Cancel Changes
         </button>
 				<button
@@ -17,7 +17,7 @@
 					:disabled="
 						!noteContent || noteContent.split(' ').join('').length === 0
 					"
-					@click="addNote"
+					@click="handleSaveClicked"
 				>
 					Save Changes
 				</button>
@@ -29,10 +29,11 @@
 <script setup>
 import AddEditNote from '@/components/notes/AddEditNote.vue';
 import { useStoreNotes } from '@/stores/storeNotes';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { ref } from 'vue';
 
 const route = useRoute();
+const router = useRouter();
 
 const storeNotes = useStoreNotes();
 
@@ -40,6 +41,11 @@ const noteContent = ref('');
 const addEditNoteRef = ref(null);
 
 noteContent.value = storeNotes.getNoteContent(route.params.id);
+
+const handleSaveClicked = () => {
+	storeNotes.updateNoteContent(route.params.id, noteContent.value);
+	router.push('/');
+};
 </script>
 
 <style lang="scss" scoped></style>

@@ -22,6 +22,12 @@ export const useStoreNotes = defineStore('storeNotes', {
 				content: newNote
 			});
 		},
+		updateNoteContent(noteId, newContent) {
+			const note = this.notes.find((note) => note.id === noteId);
+			if (note) {
+				note.content = newContent;
+			}
+		},
 		deleteNote(noteId) {
 			this.notes = this.notes.filter((note) => note.id !== noteId);
 		}
