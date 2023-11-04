@@ -8,6 +8,7 @@
 					<textarea
 						class="textarea"
 						ref="textAreaRef"
+						maxlength="100"
 						v-auto-focus
 						:placeholder="placeholder"
 						:value="modelValue"

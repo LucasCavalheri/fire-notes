@@ -1,6 +1,10 @@
 <template>
 	<div class="notes">
-		<AddEditNote ref="addEditNoteRef" placholder="Add a new note!" v-model="newNote">
+		<AddEditNote
+			ref="addEditNoteRef"
+			placholder="Add a new note!"
+			v-model="newNote"
+		>
 			<template #buttons>
 				<button
 					type="submit"
@@ -21,6 +25,7 @@
 import AddEditNote from '@/components/notes/AddEditNote.vue';
 import Note from '@/components/notes/Note.vue';
 import { useStoreNotes } from '@/stores/storeNotes';
+import { useWatchCharacters } from '@/composables/useWatchCharacters';
 import { ref } from 'vue';
 
 const storeNotes = useStoreNotes();
@@ -33,6 +38,8 @@ const addNote = () => {
 	newNote.value = '';
 	addEditNoteRef.value.focusTextArea();
 };
+
+useWatchCharacters(newNote, 100);
 </script>
 
 <style lang="scss" scoped>

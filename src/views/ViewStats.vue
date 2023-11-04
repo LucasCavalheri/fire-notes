@@ -22,16 +22,24 @@
 			class="input"
 			type="text"
 			placeholder="Do you love this application?"
+			maxlength="20"
 			v-auto-focus
+			v-model="feedbackInput"
 		/>
 	</div>
 </template>
 
 <script setup>
-import { useStoreNotes } from '../stores/storeNotes';
+import { useWatchCharacters } from '@/composables/useWatchCharacters';
 import { vAutoFocus } from '@/directives/vAutoFocus';
+import { ref } from 'vue';
+import { useStoreNotes } from '../stores/storeNotes';
 
 const storeNotes = useStoreNotes();
+
+const feedbackInput = ref('');
+
+useWatchCharacters(feedbackInput, 20);
 </script>
 
 <style lang="scss" scoped></style>
