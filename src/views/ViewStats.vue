@@ -18,11 +18,18 @@
 				</tr>
 			</tbody>
 		</table>
+		<input
+			class="input"
+			type="text"
+			placeholder="Do you love this application?"
+			v-auto-focus
+		/>
 	</div>
 </template>
 
 <script setup>
 import { useStoreNotes } from '../stores/storeNotes';
+import { vAutoFocus } from '@/directives/vAutoFocus';
 
 const storeNotes = useStoreNotes();
 </script>
