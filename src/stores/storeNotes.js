@@ -1,5 +1,11 @@
 import { db } from '@/firebase/firebase';
-import { addDoc, collection, onSnapshot } from 'firebase/firestore';
+import {
+	addDoc,
+	collection,
+	deleteDoc,
+	doc,
+	onSnapshot
+} from 'firebase/firestore';
 import { defineStore } from 'pinia';
 
 const notesCollectionRef = collection(db, 'notes');
@@ -12,21 +18,18 @@ export const useStoreNotes = defineStore('storeNotes', {
 	},
 	actions: {
 		async getNotes() {
-			const unsubscribe = onSnapshot(
-				notesCollectionRef,
-				(querySnapshot) => {
-					let notes = [];
-					querySnapshot.forEach((doc) => {
-						let note = {
-							id: doc.id,
-							content: doc.data().content
-						};
+			const unsubscribe = onSnapshot(notesCollectionRef, (querySnapshot) => {
+				let notes = [];
+				querySnapshot.forEach((doc) => {
+					let note = {
+						id: doc.id,
+						content: doc.data().content
+					};
 
-						notes.push(note);
-					});
-					this.notes = notes;
-				}
-			);
+					notes.push(note);
+				});
+				this.notes = notes;
+			});
 
 			// unsubscribe();
 		},
@@ -41,8 +44,8 @@ export const useStoreNotes = defineStore('storeNotes', {
 				note.content = newContent;
 			}
 		},
-		deleteNote(noteId) {
-			this.notes = this.notes.filter((note) => note.id !== noteId);
+		async deleteNote(noteId) {
+			await deleteDoc(doc(notesCollectionRef, noteId));
 		}
 	},
 	getters: {
