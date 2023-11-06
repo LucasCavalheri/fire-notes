@@ -42,7 +42,7 @@
 					</div>
 
 					<div class="field">
-						<p class="help is-danger" v-if="error">{{ error }}</p>
+						<p class="help is-danger" v-if="storeAuth.authErrorMessage">{{ storeAuth.authErrorMessage }}</p>
 					</div>
 
 					<div class="field is-grouped is-grouped-right">
@@ -58,9 +58,11 @@
 
 <script setup>
 import { computed, reactive, ref } from 'vue';
+import { useStoreAuth } from '@/stores/storeAuth';
+
+const storeAuth = useStoreAuth();
 
 const register = ref(false);
-const error = ref(null);
 
 const formTitle = computed(() => {
 	return register.value ? 'Register' : 'Login';
@@ -73,14 +75,14 @@ const credentials = reactive({
 
 const onSubmit = () => {
 	if (!credentials.email || !credentials.password) {
-		error.value = 'Please fill in both fields.';
+		storeAuth.authErrorMessage = 'Please fill in both fields.';
     return;
 	}
 
   if (register.value) {
-    
+    storeAuth.registerUser(credentials);
   } else {
-
+		storeAuth.loginUser(credentials);
   }
 };
 </script>
