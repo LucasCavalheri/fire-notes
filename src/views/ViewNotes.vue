@@ -41,9 +41,10 @@ import AddEditNote from '@/components/notes/AddEditNote.vue';
 import Note from '@/components/notes/Note.vue';
 import { useWatchCharacters } from '@/composables/useWatchCharacters';
 import { useStoreNotes } from '@/stores/storeNotes';
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 
 const storeNotes = useStoreNotes();
+
 const addEditNoteRef = ref(null);
 
 const newNote = ref('');
@@ -55,6 +56,10 @@ const addNote = () => {
 };
 
 useWatchCharacters(newNote, 100);
+
+onMounted(() => {
+	storeNotes.getNotes();
+});
 </script>
 
 <style lang="scss" scoped>
