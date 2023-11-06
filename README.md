@@ -1,29 +1,48 @@
-# fire-notes
+<div align='center'>
+  <img width="180px" alt="plitter" src="https://www.flaticon.com/br/icone-gratis/bloco-de-anotacoes_1686886" />
+  <h1>Fire Notes</h1>
+  <p>
+    Aplicação Full-Stack para gerenciamento de anotações, usando Vue e Firebase.
+  </p>
+</div>
 
-This template should help get you started developing with Vue 3 in Vite.
+<br />
 
-## Recommended IDE Setup
+## 🌐 Veja online:
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+### <a href="firenotes-479fa.web.app/">Fire Notes</a>
 
-## Customize configuration
+<br />
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+## 🧰 Funcionalidades
 
-## Project Setup
+- Autenticação e Autorização de usuário;
+- Criação de usuário;
+- Login de usuário;
+- Logout de usuário;
+- Usuário poderá ver apenas as suas anotações;
+- Usuário poderá criar, editar e excluir suas anotações;
+- Usuário NÃO poderá editar ou excluir anotações de outros usuários;
+- Atualização em tempo real das anotações;
+- Proteção de rotas;
 
-```sh
-npm install
-```
+## 🖥️ Tecnologias
 
-### Compile and Hot-Reload for Development
+Este projeto foi desenvolvido usando as seguintes tecnologias e stacks:
 
-```sh
-npm run dev
-```
+- **JavaScript** como linguagem;
+- **Vue** como framework;
+- **Pinia** como gerenciador de estado;
+- **Firebase** como banco de dados e autenticação;
 
-### Compile and Minify for Production
+<hr />
+<br />
 
-```sh
-npm run build
-```
+<p align='center'>
+  Criado e desenvolvido por <b>Lucas Cavalheri</b>
+  <br/><br/>
+  <a href="https://www.linkedin.com/in/lucas-cavalheri">
+    <img alt="linkedIn" height="30px" src="https://i.imgur.com/TQRXxhT.png" />
+  </a>
+  &nbsp;&nbsp;
+</p>
