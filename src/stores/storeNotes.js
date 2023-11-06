@@ -5,11 +5,14 @@ import {
 	deleteDoc,
 	doc,
 	onSnapshot,
+	orderBy,
+	query,
 	updateDoc
 } from 'firebase/firestore';
 import { defineStore } from 'pinia';
 
 const notesCollectionRef = collection(db, 'notes');
+const notesCollectionQuery = query(notesCollectionRef, orderBy('date', 'desc'));
 
 export const useStoreNotes = defineStore('storeNotes', {
 	state: () => {
@@ -19,7 +22,7 @@ export const useStoreNotes = defineStore('storeNotes', {
 	},
 	actions: {
 		async getNotes() {
-			const unsubscribe = onSnapshot(notesCollectionRef, (querySnapshot) => {
+			const unsubscribe = onSnapshot(notesCollectionQuery, (querySnapshot) => {
 				let notes = [];
 				querySnapshot.forEach((doc) => {
 					let note = {
@@ -35,8 +38,12 @@ export const useStoreNotes = defineStore('storeNotes', {
 			// unsubscribe();
 		},
 		async addNote(newNote) {
+			const currentDate = new Date().getTime();
+			const date = currentDate.toString();
+
 			await addDoc(notesCollectionRef, {
-				content: newNote
+				content: newNote,
+				date,
 			});
 		},
 		async updateNoteContent(noteId, newContent) {
