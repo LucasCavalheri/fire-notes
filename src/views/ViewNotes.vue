@@ -17,15 +17,22 @@
 			</template>
 		</AddEditNote>
 
-		<Note v-for="note in storeNotes.notes" :key="note.id" :note="note" />
+		<progress
+			class="progress is-small is-primary"
+			max="100"
+			v-if="!storeNotes.notesLoaded"
+		/>
+		<template v-else>
+			<Note v-for="note in storeNotes.notes" :key="note.id" :note="note" />
+		</template>
 	</div>
 </template>
 
 <script setup>
 import AddEditNote from '@/components/notes/AddEditNote.vue';
 import Note from '@/components/notes/Note.vue';
-import { useStoreNotes } from '@/stores/storeNotes';
 import { useWatchCharacters } from '@/composables/useWatchCharacters';
+import { useStoreNotes } from '@/stores/storeNotes';
 import { ref } from 'vue';
 
 const storeNotes = useStoreNotes();
