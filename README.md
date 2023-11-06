@@ -1,5 +1,5 @@
 <div align='center'>
-  <img width="180px" alt="plitter" src="https://www.flaticon.com/br/icone-gratis/bloco-de-anotacoes_1686886" />
+  <img width="180px" alt="Bloco de Anotações" src="https://cdn-icons-png.flaticon.com/128/1686/1686886.png" />
   <h1>Fire Notes</h1>
   <p>
     Aplicação Full-Stack para gerenciamento de anotações, usando Vue e Firebase.
