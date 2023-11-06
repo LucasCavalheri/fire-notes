@@ -1,3 +1,4 @@
+import { useStoreAuth } from '@/stores/storeAuth';
 import ViewAuth from '@/views/ViewAuth.vue';
 import ViewEditNote from '@/views/ViewEditNote.vue';
 import ViewNotes from '@/views/ViewNotes.vue';
@@ -28,6 +29,22 @@ const router = createRouter({
 			component: ViewAuth
 		}
 	]
+});
+
+router.beforeEach(async (to, from) => {
+	const storeAuth = useStoreAuth();
+
+	if (!storeAuth.user.id && to.name !== 'Auth') {
+		return {
+			name: 'Auth'
+		};
+	}
+
+	if (storeAuth.user.id && to.name === 'Auth') {
+		return {
+			name: 'Notes'
+		};
+	}
 });
 
 export default router;
