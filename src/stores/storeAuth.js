@@ -6,6 +6,7 @@ import {
 	signOut
 } from 'firebase/auth';
 import { defineStore } from 'pinia';
+import { useStoreNotes } from './storeNotes';
 
 export const useStoreAuth = defineStore('storeAuth', {
 	state: () => {
@@ -16,20 +17,24 @@ export const useStoreAuth = defineStore('storeAuth', {
 	},
 	actions: {
 		init() {
+			const storeNotes = useStoreNotes();
+
 			onAuthStateChanged(auth, (user) => {
 				if (user) {
 					this.user.id = user.uid;
 					this.user.email = user.email;
 					this.router.push('/');
+					storeNotes.init();
 				} else {
 					this.user = {};
 					this.router.replace('/auth');
+					storeNotes.clearNotes();
 				}
 			});
 		},
 		async registerUser(credentials) {
 			try {
-				const user = await createUserWithEmailAndPassword(
+				await createUserWithEmailAndPassword(
 					auth,
 					credentials.email,
 					credentials.password
@@ -46,7 +51,7 @@ export const useStoreAuth = defineStore('storeAuth', {
 		},
 		async loginUser(credentials) {
 			try {
-				const user = await signInWithEmailAndPassword(
+				await signInWithEmailAndPassword(
 					auth,
 					credentials.email,
 					credentials.password
