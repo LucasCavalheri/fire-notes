@@ -1,3 +1,4 @@
+import ViewAuth from '@/views/ViewAuth.vue';
 import ViewEditNote from '@/views/ViewEditNote.vue';
 import ViewNotes from '@/views/ViewNotes.vue';
 import ViewStats from '@/views/ViewStats.vue';
@@ -20,6 +21,11 @@ const router = createRouter({
 			path: '/stats',
 			name: 'Stats',
 			component: ViewStats
+		},
+		{
+			path: '/auth',
+			name: 'Auth',
+			component: ViewAuth
 		}
 	]
 });
