@@ -23,7 +23,7 @@
 							<input
 								class="input"
 								type="text"
-								placeholder="e.g Alex Smith"
+								placeholder="example@email.com"
 								v-model="credentials.email"
 							/>
 						</div>
@@ -42,13 +42,15 @@
 					</div>
 
 					<div class="field">
-						<p class="help is-danger" v-if="storeAuth.authErrorMessage">{{ storeAuth.authErrorMessage }}</p>
+						<p class="help is-danger" v-if="storeAuth.authErrorMessage">
+							{{ storeAuth.authErrorMessage }}
+						</p>
 					</div>
 
-					<div class="field is-grouped is-grouped-right">
-						<p class="control">
-							<button class="button is-primary">{{ formTitle }}</button>
-						</p>
+					<div class="field is-flex is-justify-content-space-between">
+						<RouterLink class="control forgot-password" v-if="!register" to="/forgot-password">Forgot Password?</RouterLink>
+
+						<button class="button is-primary">{{ formTitle }}</button>
 					</div>
 				</form>
 			</div>
@@ -57,8 +59,8 @@
 </template>
 
 <script setup>
-import { computed, reactive, ref } from 'vue';
 import { useStoreAuth } from '@/stores/storeAuth';
+import { computed, reactive, ref } from 'vue';
 
 const storeAuth = useStoreAuth();
 
@@ -74,16 +76,23 @@ const credentials = reactive({
 });
 
 const onSubmit = () => {
+	const emailRegex = /\S+@\S+\.\S+/;
+
 	if (!credentials.email || !credentials.password) {
 		storeAuth.authErrorMessage = 'Please fill in both fields.';
-    return;
+		return;
 	}
 
-  if (register.value) {
-    storeAuth.registerUser(credentials);
-  } else {
+	if (!emailRegex.test(credentials.email)) {
+		storeAuth.authErrorMessage = 'Please enter a valid email address.';
+		return;
+	}
+
+	if (register.value) {
+		storeAuth.registerUser(credentials);
+	} else {
 		storeAuth.loginUser(credentials);
-  }
+	}
 };
 </script>
 
@@ -91,5 +100,14 @@ const onSubmit = () => {
 .auth-form {
 	max-width: 25rem;
 	margin: 0 auto;
+}
+
+.forgot-password {
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+.forgot-password:hover {
+	text-decoration: none;
 }
 </style>

@@ -2,6 +2,7 @@ import { auth } from '@/firebase/firebase';
 import {
 	createUserWithEmailAndPassword,
 	onAuthStateChanged,
+	sendPasswordResetEmail,
 	signInWithEmailAndPassword,
 	signOut
 } from 'firebase/auth';
@@ -51,7 +52,7 @@ export const useStoreAuth = defineStore('storeAuth', {
 		},
 		async loginUser(credentials) {
 			try {
-				await signInWithEmailAndPassword(
+				const res = await signInWithEmailAndPassword(
 					auth,
 					credentials.email,
 					credentials.password
@@ -69,6 +70,13 @@ export const useStoreAuth = defineStore('storeAuth', {
 				if (error) {
 					console.log(error);
 				}
+			}
+		},
+		async resetPassword(email) {
+			try {
+				await sendPasswordResetEmail(auth, email);
+			} catch (error) {
+				console.log(error);
 			}
 		}
 	}
