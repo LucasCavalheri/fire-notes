@@ -10,7 +10,7 @@
 
 ## 🌐 Veja online:
 
-### <a href="https://firenotes-479fa.web.app/">Fire Notes</a>
+### <a href="https://fire-notes-three.vercel.app/">Fire Notes</a>
 
 <br />
 
