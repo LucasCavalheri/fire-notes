@@ -20,6 +20,7 @@
 - Criação de usuário;
 - Login de usuário;
 - Logout de usuário;
+- Usuário poderá recuperar sua senha;
 - Usuário poderá ver apenas as suas anotações;
 - Usuário poderá criar, editar e excluir suas anotações;
 - Usuário NÃO poderá editar ou excluir anotações de outros usuários;
